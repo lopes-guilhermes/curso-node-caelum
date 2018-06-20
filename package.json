@@ -1,0 +1,24 @@
+{
+  "name": "casadocodigo",
+  "version": "1.0.0",
+  "description": "API da casa do código",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "loja",
+    "virtual"
+  ],
+  "author": "Guilherme Lopes",
+  "license": "MPL-2.0",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
