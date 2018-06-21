@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const connectionFactory = require('./infra/connectFactory');
 
 function rotas(app) {
     //executa sempre que fizer uma requisição
@@ -14,16 +14,10 @@ function rotas(app) {
     
     app.get('/produtos', (req,res) => {
         console.log('Requisição em /produtos');
-
-        const connection = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'admin',
-            database: 'casadocodigo'
-        });
+        const connection = connectionFactory();
 
         connection.query('SELECT * FROM livros', (error, livros, fields) => {
-            console.log(error);
+            if (error) console.log(error);
             
             res.render('produtos/lista', { livros });
         });
