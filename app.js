@@ -1,4 +1,5 @@
 const connectionFactory = require('./infra/connectFactory');
+const LivrosDao = require('./dao/LivrosDao');
 
 function rotas(app) {
     //executa sempre que fizer uma requisição
@@ -7,7 +8,7 @@ function rotas(app) {
         next();
     });
     
-    app.get('/',(req,res)=> {
+    app.get('/', (req,res) => {
         console.log('Requisição em /');
         res.render('index', { title:'HOME' });
     });
@@ -15,10 +16,10 @@ function rotas(app) {
     app.get('/produtos', (req,res) => {
         console.log('Requisição em /produtos');
         const connection = connectionFactory();
+        const livrosDao = new LivrosDao(connection);
 
-        connection.query('SELECT * FROM livros', (error, livros, fields) => {
+        livrosDao.getAll((error,livros,fields) => {
             if (error) console.log(error);
-            
             res.render('produtos/lista', { livros });
         });
 
