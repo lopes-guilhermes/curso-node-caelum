@@ -1,3 +1,5 @@
+const mysql = require('mysql');
+
 function rotas(app) {
     //executa sempre que fizer uma requisição
     app.use((req, res, next) => {
@@ -12,7 +14,21 @@ function rotas(app) {
     
     app.get('/produtos', (req,res) => {
         console.log('Requisição em /produtos');
-        res.render('produtos/lista');
+
+        const connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: 'admin',
+            database: 'casadocodigo'
+        });
+
+        connection.query('SELECT * FROM livros', (error, livros, fields) => {
+            console.log(error);
+            
+            res.render('produtos/lista', { livros });
+        });
+
+        connection.end();
     });
     
     app.get('/contato', (req,res) => {
