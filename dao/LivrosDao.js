@@ -4,10 +4,8 @@ class LivrosDao {
     }
 
     getAll(callback) {
-        //connection.query('SELECT * FROM livros', (error, livros, fields) => {
-        //    callback(error,livros,fields);
-        //});
         this.connection.query('SELECT * FROM livros', callback);
     }
 }
+
 module.exports = LivrosDao
