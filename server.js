@@ -1,10 +1,12 @@
 const consign = require('consign');
 const express = require('express');
+const bodyParser = require('body-parser')
 const server = express();
 const port = 8080;
 
 server.set('view engine', 'ejs');
 server.use(express.static('./public'));
+server.use(bodyParser.urlencoded({extended:true}));
 
 consign()
     .include('./routers')
